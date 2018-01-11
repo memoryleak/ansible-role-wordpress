@@ -16,7 +16,6 @@ wordpress_webroot_path: /var/www
 wordpress_directory: wordpress
 wordpress_install_group: apache
 wordpress_install_user: apache
-wordpress_tarball_location: /tmp/latest.tar.gz
 ```
 
 Dependencies
