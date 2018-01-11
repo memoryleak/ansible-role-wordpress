@@ -1,0 +1,19 @@
+---
+# tasks file for memoryleak.wordpress
+- name: Check if Wordpress directory already exists.
+  stat: 
+    path: "{{wordpress_webroot_path}}/{{ wordpress_directory }}"
+  tags: ['stat']
+  register: stat_wordpress_full_path
+
+- name: Extract Wordpress tarball. 
+  unarchive: 
+    creates: "{{ wordpress_webroot_path }}/{{ wordpress_directory }}"
+    dest: "{{ wordpress_webroot_path }}"
+    group: "{{ wordpress_install_group }}"
+    mode: 0644
+    owner: "{{ wordpress_install_user }}"
+    src: https://wordpress.org/latest.tar.gz
+    remote_src: yes
+  tags: ['unarchive']
+  when: stat_wordpress_full_path.stat.exists == false
