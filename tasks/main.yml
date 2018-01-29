@@ -6,6 +6,16 @@
   tags: ['stat']
   register: stat_wordpress_full_path
 
+- name: Create project directory.
+  file: 
+    group: "{{ wordpress_install_group }}"
+    mode: 0644
+    owner: "{{ wordpress_install_user }}"
+    path: "{{ wordpress_webroot_path }}"
+    state: directory
+  tags: ['file']
+  when: stat_wordpress_full_path.stat.exists == false
+
 - name: Extract Wordpress tarball. 
   unarchive: 
     creates: "{{ wordpress_webroot_path }}/{{ wordpress_directory }}"
