@@ -27,3 +27,10 @@
     remote_src: yes
   tags: ['unarchive']
   when: stat_wordpress_full_path.stat.exists == false
+
+- name: Download Wordpress cli
+  get_url: 
+    dest: /usr/local/bin/wp-cli
+    mode: 0755
+    url:  https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+  tags: ['get_url']
